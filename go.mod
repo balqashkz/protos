@@ -1,4 +1,4 @@
-module github.com/balqashkz/protos;
+module github.com/balqashkz/protos
 
 go 1.22
 
