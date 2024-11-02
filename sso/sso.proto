@@ -5,25 +5,40 @@ package sso;
 option go_package = "balqash.sso.v1;sso";
 
 service Auth {
-  rpc Register (RegisterRequest) returns (RegisterResponse);
-  rpc Login (LoginRequest) returns (LoginResponse);
+  // Для обновление access_token
+  rpc RefreshAccessToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+
+  // Для получение списка публичных ключей
+  rpc GetPublicKeys(GetPublicKeysRequest) returns (GetPublicKeysResponse);
+
 }
 
-message RegisterRequest {
-  string email = 1;
-  string password = 2;
+// Для обновление access_token
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+  string client_id = 2;
 }
 
-message RegisterResponse {
-  int64 user_id = 1;
+message RefreshTokenResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  int32 expires_in = 3;
 }
 
-message LoginRequest {
-  string email = 1;
-  string password = 2;
-  int32 app_id = 3;
+// Для получение списка публичных ключей
+
+message GetPublicKeysRequest {}
+
+message GetPublicKeysResponse {
+  repeated PublicKey keys = 1;
 }
 
-message LoginResponse {
-  string token = 1;
+message PublicKey {
+  string kid = 1;
+  string kty = 2;
+  string alg = 3;
+  string use = 4;
+  string n = 5;
+  string e = 6;
 }
