@@ -38,7 +38,6 @@ message PublicKey {
   string kid = 1;
   string kty = 2;
   string alg = 3;
-  string use = 4;
-  string n = 5;
-  string e = 6;
+  string n = 4;
+  string e = 5;
 }
